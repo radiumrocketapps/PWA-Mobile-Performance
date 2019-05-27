@@ -1,0 +1,15 @@
+.cell, .activeCell {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+.cell {
+    background: blue;
+}
+
+.activeCell {
+    background: yellow;
+}
