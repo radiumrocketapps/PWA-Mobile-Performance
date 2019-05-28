@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './Cell.css'
 
-class Cell extends React.Component {
-
+class Cell extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: false,
+      active: false
     }
   }
 
@@ -18,11 +17,12 @@ class Cell extends React.Component {
   render() {
     const { active } = this.state
     return (
-      <div className={active ? "activeCell" : "cell"} onClick={this.handleClick}>
-        {this.props.number}
-      </div>
+      <li
+        className={active ? 'activeCell' : 'cell'}
+        onClick={this.handleClick}
+      />
     )
-  } 
+  }
 }
 
 export default Cell
