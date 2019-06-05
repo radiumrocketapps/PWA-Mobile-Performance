@@ -1,10 +1,24 @@
-.App {
+.container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border: 1px dotted black;
+  height: 100vh;
+  width: 100vw;
+  background: #CFDFDF;
+  overflow: scroll;
 }
 
-.App img {
-  width: 100%;
+.board {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 300px;
+}
+
+.play {
+  height: 30px;
+  margin-top: 10px;
 }
