@@ -58,6 +58,19 @@ class Game extends Component {
     }
   }
 
+  handleStop = () => {
+    this.setState(
+      {
+        gameRunning: false
+      },
+      () => {
+        if (this.intervalRef) {
+          clearInterval(this.intervalRef)
+        }
+      }
+    )
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -85,7 +98,7 @@ class Game extends Component {
           <button className="button" type="button" onClick={this.handleStart}>
             Start
           </button>
-          <button className="button" type="button">
+          <button className="button" type="button" onClick={this.handleStop}>
             Stop
           </button>
         </div>
