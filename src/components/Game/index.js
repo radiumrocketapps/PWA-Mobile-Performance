@@ -7,7 +7,9 @@ class Game extends Component {
     super(props)
     this.state = {
       columns: 5,
-      rows: 5
+      rows: 5,
+      gameRunning: false,
+      interval: 100
     }
   }
 
@@ -40,6 +42,22 @@ class Game extends Component {
     return newBoard
   }
 
+  handleStart = () => {
+    if (!this.state.gameRunning) {
+      this.setState(
+        {
+          gameRunning: true
+        },
+        () => {
+          this.intervalRef = setInterval(
+            () => console.log('Run Game Function'),
+            this.state.interval
+          )
+        }
+      )
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -64,7 +82,7 @@ class Game extends Component {
           </label>
         </div>
         <div className="buttons-container">
-          <button className="button" type="button">
+          <button className="button" type="button" onClick={this.handleStart}>
             Start
           </button>
           <button className="button" type="button">
