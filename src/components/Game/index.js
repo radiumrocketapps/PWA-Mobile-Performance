@@ -14,15 +14,19 @@ class Game extends Component {
   }
 
   handleRowChange = event => {
-    this.setState({
-      rows: event.target.value
-    })
+    if (!this.state.gameRunning) {
+      this.setState({
+        rows: event.target.value
+      })
+    }
   }
 
   handleColumnChange = event => {
-    this.setState({
-      columns: event.target.value
-    })
+    if (!this.state.gameRunning) {
+      this.setState({
+        columns: event.target.value
+      })
+    }
   }
 
   renderBoard = () => {
