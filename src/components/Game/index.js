@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Cell from './Cell'
 import './game.css'
 
 class Game extends Component {
@@ -20,6 +21,23 @@ class Game extends Component {
     this.setState({
       columns: event.target.value
     })
+  }
+
+  renderBoard = () => {
+    var newBoard = []
+    var cellRow = []
+    for (var i = 0; i < this.state.rows; i++) {
+      for (var j = 0; j < this.state.columns; j++) {
+        cellRow.push(<Cell key={[i, j]} />)
+      }
+      newBoard.push(
+        <div className="row" key={i}>
+          {cellRow}
+        </div>
+      )
+      cellRow = []
+    }
+    return newBoard
   }
 
   render() {
@@ -53,7 +71,7 @@ class Game extends Component {
             Stop
           </button>
         </div>
-        <div className="board">BOARD</div>
+        <div className="board">{this.renderBoard()}</div>
       </React.Fragment>
     )
   }

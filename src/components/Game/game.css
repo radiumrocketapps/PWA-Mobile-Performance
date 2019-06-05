@@ -32,8 +32,9 @@
 }
 
 .board {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px 60px;
   border: black dotted 2px;
-  font-size: 30px;
-  text-align: center;
 }
