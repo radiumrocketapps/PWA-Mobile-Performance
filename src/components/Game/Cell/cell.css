@@ -1,0 +1,6 @@
+.cell-container {
+  display: flex;
+  padding: 10px;
+  margin: 1px;
+  border: 1px solid black;
+}
