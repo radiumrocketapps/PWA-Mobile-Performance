@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Cell from './Cell'
+import Board from './boardLogic'
 import './game.css'
 
 class Game extends Component {
@@ -9,7 +10,8 @@ class Game extends Component {
       columns: 5,
       rows: 5,
       gameRunning: false,
-      interval: 100
+      interval: 100,
+      board: new Board()
     }
   }
 
@@ -34,7 +36,25 @@ class Game extends Component {
     var cellRow = []
     for (var i = 0; i < this.state.rows; i++) {
       for (var j = 0; j < this.state.columns; j++) {
-        cellRow.push(<Cell key={[i, j]} />)
+        if (this.state.board.isCellAlive(i + ' , ' + j)) {
+          cellRow.push(
+            <Cell
+              key={[i, j]}
+              position={{ x: i, y: j }}
+              live={true}
+              storeCell={this.storeCell.bind(this)}
+            />
+          )
+        } else {
+          cellRow.push(
+            <Cell
+              key={[i, j]}
+              position={{ x: i, y: j }}
+              live={false}
+              storeCell={this.storeCell.bind(this)}
+            />
+          )
+        }
       }
       newBoard.push(
         <div className="row" key={i}>
@@ -54,7 +74,7 @@ class Game extends Component {
         },
         () => {
           this.intervalRef = setInterval(
-            () => console.log('Run Game Function'),
+            () => this.runGame(),
             this.state.interval
           )
         }
@@ -73,6 +93,20 @@ class Game extends Component {
         }
       }
     )
+  }
+
+  runGame = () => {
+    this.setState({
+      board: this.state.board.addBoard()
+    })
+  }
+
+  storeCell = position => {
+    if (!this.state.gameRunning) {
+      this.setState({
+        board: this.state.board.storeCell(position)
+      })
+    }
   }
 
   render() {

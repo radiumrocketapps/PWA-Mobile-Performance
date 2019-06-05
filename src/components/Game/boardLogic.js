@@ -49,7 +49,7 @@ export default class Board {
     return new Board(this.nextBoard)
   }
 
-  calculateDeadCellsNeighbors = position => {
+  calculateLiveCellsNeighbors = position => {
     // With the position, It calculates the live cells for the new board and also take into account the neighbors of each live cell.
     var liveNeighbors = 0 //This is because initialy we don't know how many live neighbors are there
     //Here we are going to check the state of all the cells neighbors. This will alow us to apply the rules

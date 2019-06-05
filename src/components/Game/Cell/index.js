@@ -3,7 +3,12 @@ import './cell.css'
 
 class Cell extends Component {
   render() {
-    return <div className="cell-container" />
+    return (
+      <div
+        onClick={() => this.props.storeCell(this.props.position)}
+        className={this.props.live ? 'cellContainerLive' : 'cellContainerDead'}
+      />
+    )
   }
 }
 
