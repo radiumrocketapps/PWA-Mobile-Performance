@@ -1,8 +1,13 @@
 export default class Board {
-  constructor(liveCells = new Map()) {
-    this.liveCells = liveCells
+  constructor(boardNumber = 0, liveCells = new Map()) {
+		this.liveCells = liveCells
+		this.boardNumber = boardNumber
     this.nextBoard = new Map()
     this.deadCells = new Map()
+	}
+	
+	getnumberBoard = () => {
+    return this.boardNumber
   }
 
   getLiveCells = () => {
@@ -35,7 +40,7 @@ export default class Board {
     } else {
       this.addCell(position)
     }
-    return new Board(this.liveCells)
+    return new Board(this.boardNumber, this.liveCells)
   }
 
   addBoard = () => {
@@ -45,8 +50,9 @@ export default class Board {
     })
     this.deadCells.forEach(item => {
       this.calculateDeadCellsNeighbors(item)
-    })
-    return new Board(this.nextBoard)
+		})
+		this.boardNumber++
+    return new Board(this.boardNumber, this.nextBoard)
   }
 
   calculateLiveCellsNeighbors = position => {

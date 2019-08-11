@@ -160,7 +160,8 @@ class Game extends Component {
           <button className="button" type="button" onClick={this.handleStop}>
             Stop
           </button>
-        </div> */}
+				</div> */}
+				<span>Board: {this.state.board.getnumberBoard()}</span>
         <div className="board">{this.renderBoard()}</div>
       </React.Fragment>
     )
