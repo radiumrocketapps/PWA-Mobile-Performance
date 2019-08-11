@@ -1,4 +1,4 @@
-.inputs-container {
+/* .inputs-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,12 +29,10 @@
   padding: 10px 20px;
   text-align: center;
   font-size: 16px;
-}
+} */
 
 .board {
   display: flex;
-  justify-content: center;
-  margin: 20px;
-  padding: 20px 60px;
-  border: black dotted 2px;
+  justify-content: left;
+	overflow: scroll;
 }

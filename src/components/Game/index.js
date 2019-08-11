@@ -7,12 +7,16 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      columns: 5,
-      rows: 5,
+      rows: 100,
+      columns: 100,
       gameRunning: false,
+      firstRender: true,
+      density: 0.5,
       interval: 100,
       board: new Board()
-    }
+		}
+		this.liveCells = [];
+    this.numberOfLiveCells = this.state.rows * this.state.columns * this.state.density
   }
 
   handleRowChange = event => {
@@ -50,7 +54,7 @@ class Game extends Component {
             <Cell
               key={[i, j]}
               position={{ x: i, y: j }}
-              live={false}
+              live={this.state.firstRender && this.aleatoryMapping(i, j)}
               storeCell={this.storeCell.bind(this)}
             />
           )
@@ -64,13 +68,23 @@ class Game extends Component {
       cellRow = []
     }
     return newBoard
+	}
+	
+	aleatoryMapping = (x, y) => {
+    const random_boolean = Math.random() < this.state.density
+    if (random_boolean && this.liveCells.length < this.numberOfLiveCells) {
+      this.liveCells.push({ x, y })
+      return true
+    }
+    return false
   }
 
   handleStart = () => {
     if (!this.state.gameRunning) {
       this.setState(
         {
-          gameRunning: true
+          gameRunning: true,
+          firstRender: false
         },
         () => {
           this.intervalRef = setInterval(
@@ -82,18 +96,18 @@ class Game extends Component {
     }
   }
 
-  handleStop = () => {
-    this.setState(
-      {
-        gameRunning: false
-      },
-      () => {
-        if (this.intervalRef) {
-          clearInterval(this.intervalRef)
-        }
-      }
-    )
-  }
+  // handleStop = () => {
+  //   this.setState(
+  //     {
+  //       gameRunning: false
+  //     },
+  //     () => {
+  //       if (this.intervalRef) {
+  //         clearInterval(this.intervalRef)
+  //       }
+  //     }
+  //   )
+  // }
 
   runGame = () => {
     this.setState({
@@ -107,12 +121,19 @@ class Game extends Component {
         board: this.state.board.storeCell(position)
       })
     }
+	}
+	
+	componentDidMount() {
+    this.liveCells.map(cell => {
+      return this.storeCell(cell)
+		})
+		this.handleStart();
   }
 
   render() {
     return (
       <React.Fragment>
-        <div className="inputs-container">
+        {/* <div className="inputs-container">
           <label className="label">
             Rows:
             <input
@@ -139,7 +160,7 @@ class Game extends Component {
           <button className="button" type="button" onClick={this.handleStop}>
             Stop
           </button>
-        </div>
+        </div> */}
         <div className="board">{this.renderBoard()}</div>
       </React.Fragment>
     )
