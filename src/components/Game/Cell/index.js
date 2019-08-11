@@ -5,7 +5,7 @@ class Cell extends Component {
   render() {
     return (
       <div
-        onClick={() => this.props.storeCell(this.props.position)}
+        // onClick={() => this.props.storeCell(this.props.position)}
         className={this.props.live ? 'cellContainerLive' : 'cellContainerDead'}
       />
     )
